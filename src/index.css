@@ -4,60 +4,49 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* Shiva Portfolio Design System - Dark Tech Aesthetic */
+/* Shiva Portfolio Design System - Clean & Minimal */
 
 @layer base {
   :root {
-    --background: 222 47% 5%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3%;
 
-    --card: 222 47% 8%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 96%;
+    --card-foreground: 0 0% 3%;
 
-    --popover: 222 47% 8%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3%;
 
-    --primary: 187 85% 43%;
-    --primary-foreground: 222 47% 5%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 270 70% 55%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 0 0% 64%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 222 30% 15%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 0 0% 89%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 270 70% 55%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 187 85% 43%;
+    --border: 0 0% 89%;
+    --input: 0 0% 96%;
+    --ring: 0 0% 0%;
 
-    --radius: 0.75rem;
-
-    /* Custom Portfolio Tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(187 85% 43%) 0%, hsl(270 70% 55%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(222 47% 5%) 0%, hsl(222 47% 10%) 50%, hsl(240 40% 8%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(222 47% 10% / 0.8) 0%, hsl(222 47% 8% / 0.6) 100%);
-    --gradient-glow: radial-gradient(ellipse at center, hsl(187 85% 43% / 0.15) 0%, transparent 70%);
-    
-    --glass-bg: hsl(222 47% 10% / 0.6);
-    --glass-border: hsl(222 30% 25% / 0.5);
-    
-    --shadow-glow: 0 0 60px -15px hsl(187 85% 43% / 0.4);
+    --radius: 0.5rem;
     --shadow-card: 0 25px 50px -12px hsl(222 47% 3% / 0.5);
     
-    --sidebar-background: 222 47% 8%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 187 85% 43%;
-    --sidebar-primary-foreground: 222 47% 5%;
-    --sidebar-accent: 222 30% 15%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 222 30% 18%;
-    --sidebar-ring: 187 85% 43%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 0 0% 3%;
+    --sidebar-primary: 0 0% 0%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 89%;
+    --sidebar-accent-foreground: 0 0% 3%;
+    --sidebar-border: 0 0% 89%;
+    --sidebar-ring: 0 0% 0%;
   }
 }
 
@@ -82,31 +71,19 @@
 
 @layer components {
   .glass-card {
-    @apply backdrop-blur-xl border border-white/10 rounded-xl;
-    background: var(--glass-bg);
+    @apply border border-border rounded-lg bg-card;
   }
 
   .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
+    @apply text-foreground;
   }
 
   .gradient-border {
-    @apply relative;
-  }
-
-  .gradient-border::before {
-    content: '';
-    @apply absolute inset-0 rounded-xl p-[1px];
-    background: var(--gradient-primary);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+    @apply border border-border;
   }
 
   .glow-effect {
-    box-shadow: var(--shadow-glow);
+    @apply shadow-md;
   }
 
   .text-gradient-hover {
@@ -114,33 +91,27 @@
   }
 
   .text-gradient-hover:hover {
-    @apply bg-clip-text text-transparent;
-    background-image: var(--gradient-primary);
+    @apply text-primary;
   }
 
   .animate-float {
-    animation: float 6s ease-in-out infinite;
+    /* Removed animation */
   }
 
   .animate-pulse-glow {
-    animation: pulse-glow 3s ease-in-out infinite;
+    /* Removed animation */
   }
 
   .animate-gradient {
-    background-size: 200% 200%;
-    animation: gradient-shift 8s ease infinite;
+    /* Removed animation */
   }
 
   .grid-pattern {
-    background-image: 
-      linear-gradient(hsl(222 30% 18% / 0.3) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(222 30% 18% / 0.3) 1px, transparent 1px);
-    background-size: 60px 60px;
+    /* Removed pattern */
   }
 
   .dot-pattern {
-    background-image: radial-gradient(hsl(222 30% 25% / 0.5) 1px, transparent 1px);
-    background-size: 30px 30px;
+    /* Removed pattern */
   }
 }
 
@@ -152,20 +123,4 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-}
-
-@keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
