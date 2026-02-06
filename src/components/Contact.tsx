@@ -90,7 +90,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Location</p>
-                    <p className="text-foreground font-medium">San Francisco, CA</p>
+                    <p className="text-foreground font-medium">Delhi, India</p>
                   </div>
                 </div>
               </div>
@@ -101,9 +101,9 @@ const Contact = () => {
               <h3 className="text-xl font-bold text-foreground mb-6">Follow Me</h3>
               <div className="grid grid-cols-3 gap-4">
                 {[
-                  { icon: Github, label: 'GitHub', href: 'https://github.com/shiva', color: 'hover:text-foreground' },
-                  { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/shiva', color: 'hover:text-blue-400' },
-                  { icon: Twitter, label: 'Twitter', href: 'https://twitter.com/shiva', color: 'hover:text-sky-400' },
+                  { icon: Github, label: 'GitHub', href: 'https://github.com/shiva4040', color: 'hover:text-foreground' },
+                  { icon: Linkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/', color: 'hover:text-blue-400' },
+                  { icon: Twitter, label: 'Twitter', href: 'https://twitter.com/', color: 'hover:text-sky-400' },
                 ].map(({ icon: Icon, label, href, color }) => (
                   <a
                     key={label}
