@@ -1,73 +1,86 @@
-# Welcome to your Lovable project
+# shiva4040
 
-## Project info
+`applied AI research` · `affective computing` · `human-centric ML`
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+---
 
-## How can I edit this code?
+## ▸ research focus
 
-There are several ways of editing your application.
+Building AI systems that perceive, adapt, and assist — with an emphasis on **emotion recognition**, **explainable recommendations**, and **lightweight deployment**.
 
-**Use Lovable**
+Current investigations:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- cross-modal affect sensing (vision → audio → context)
+- real‑time inference for on‑device AI
+- hybrid symbolic‑neural career guidance frameworks
 
-Changes made via Lovable will be committed automatically to this repo.
+> *“From facial expression to meaningful action — bridging perception and utility.”*
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## ▸ selected research prototypes
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+| project | domain | approach |
+| :------ | :----- | :------- |
+| [MoodifyAI](https://github.com/shiva4040/MoodifyAI) | affective music recommendation | facial emotion detection → personalised audio retrieval |
+| [AI Career Guidance System](https://github.com/shiva4040/AI-Career-Guidance-System) | skill‑aware path planning | rule‑based + collaborative filtering |
+| [Password Manager](https://github.com/shiva4040/password_manager_system) | secure systems | local encryption, UX research on memorability |
 
-Follow these steps:
+All repositories include working prototypes and experimental results.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## ▸ methodology & tooling
 
-# Step 3: Install the necessary dependencies.
-npm i
+`Python` · `PyTorch` · `scikit-learn` · `OpenCV` · `React` · `FastAPI` · `Docker`
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+Research workflow:
 
-**Edit a file directly in GitHub**
+- literature review → hypothesis formulation → rapid prototyping (Jupyter / Colab)  
+- model optimisation (ONNX, TensorRT) → frontend integration (React/TS) → qualitative evaluation
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## ▸ ongoing work
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- **affective loop in music recommendation** — user feedback integration for mood drift adaptation  
+- **small‑language models for career dialogue** — privacy‑first conversational agents  
+- **reproducible research templates** — open‑source experiment tracking (MLflow + DVC)
 
-## What technologies are used for this project?
+---
 
-This project is built with:
+## ▸ academic footprint
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+| | |
+| :-- | :-- |
+| preprints | *coming soon* |
+| code repositories | [github.com/shiva4040](https://github.com/shiva4040) |
+| google scholar | *pending* |
+| thesis direction | AI for personalised well‑being |
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+## ▸ activity & code
 
-## Can I connect a custom domain to my Lovable project?
+<div align="center">
+  <img height="160" src="https://github-readme-stats.vercel.app/api?username=shiva4040&show_icons=true&theme=github_dark&hide_border=true&bg_color=0D1117&icon_color=58A6FF&title_color=FFFFFF&text_color=8B949E&count_private=true" />
+  <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=shiva4040&layout=compact&theme=github_dark&hide_border=true&bg_color=0D1117&title_color=FFFFFF&text_color=8B949E" />
+</div>
 
-Yes, you can!
+<br/>
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+<div align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=shiva4040&theme=github-dark&hide_border=true&background=0D1117&stroke=30363D&ring=58A6FF&fire=58A6FF&currStreakLabel=FFFFFF" />
+</div>
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+---
+
+## ▸ connect
+
+`shiva4040@research` · [github](https://github.com/shiva4040) · [portfolio](https://shiva404.in/) · *open to collaboration*
+
+---
+
+<div align="center">
+  <sub>  //  building AI that understands humans — not just patterns  //  </sub>
+</div>
