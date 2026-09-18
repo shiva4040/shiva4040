@@ -427,7 +427,13 @@ body {
   list-style: none;
 }
 
-.nav-item a {
+.nav-item {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-item > a:not(.nav-glass-cta):not(.nav-social-icon-btn) {
   font-family: var(--font-mono);
   font-size: 0.73rem;
   letter-spacing: 0.075em;
@@ -526,33 +532,45 @@ body {
 }
 
 .nav-social-group {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
   gap: 10px;
-  margin-left: 4px;
+  margin-left: 6px;
+  padding: 0 !important;
+  list-style: none;
 }
 
 .nav-social-icon-btn {
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  max-width: 36px !important;
+  max-height: 36px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  line-height: 0 !important;
+  font-size: 0 !important;
+  box-sizing: border-box !important;
   background: var(--glass-tier-control-bg);
   backdrop-filter: var(--glass-tier-control-blur);
   -webkit-backdrop-filter: var(--glass-tier-control-blur);
   border: var(--glass-tier-control-border);
   box-shadow: var(--glass-tier-control-shadow);
   color: var(--text-primary);
-  text-decoration: none;
+  text-decoration: none !important;
+  cursor: pointer;
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
               background 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
               border-color 0.35s ease,
               box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  cursor: pointer;
   will-change: transform;
 }
 
@@ -569,11 +587,16 @@ body {
 }
 
 .nav-social-icon-btn svg {
-  width: 18px;
-  height: 18px;
-  display: block;
+  width: 18px !important;
+  height: 18px !important;
+  display: block !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
+  pointer-events: none;
+  transform-origin: center center;
   transition: transform 0.35s cubic-bezier(0.2, 1, 0.3, 1.2);
 }
 
