@@ -780,72 +780,58 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(860px, 92vw);
-  height: 420px;
-  background: radial-gradient(ellipse 640px 320px at center, rgba(250, 250, 248, 0.94) 0%, rgba(250, 250, 248, 0.65) 45%, rgba(250, 250, 248, 0.12) 75%, transparent 100%);
+  width: min(840px, 92vw);
+  height: 380px;
+  background: radial-gradient(ellipse 620px 300px at center, rgba(250, 250, 248, 0.94) 0%, rgba(250, 250, 248, 0.62) 45%, rgba(250, 250, 248, 0.10) 75%, transparent 100%);
   pointer-events: none;
   z-index: -1;
   filter: blur(28px);
 }
 
-/* Tier 1 Specular Micro-Glass Capsule */
-.hero-glass-capsule {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 20px;
-  border-radius: 100px;
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 2px 10px rgba(13, 14, 20, 0.025), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  margin-bottom: clamp(18px, 2.6vh, 26px);
-  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease;
-}
-
-.hero-glass-capsule .mono-tag {
-  font-family: var(--font-mono);
-  font-size: var(--text-fluid-mono);
-  color: var(--text-muted);
-  letter-spacing: 0.12em;
-  font-weight: 600;
-}
-
-/* Fluid Dominant Big Typography - Pure Solid Ink (No Clipping/Masking Glitches) */
+/* Fluid Dominant Big Typography - Pure Solid Ink (Focal Centerpiece) */
 .hero-title {
   font-family: var(--font-sans);
   font-size: var(--text-fluid-hero);
   font-weight: 800;
   letter-spacing: -0.045em;
-  line-height: 0.92;
+  line-height: 0.90;
   color: #0D0E14;
   margin: 0 0 clamp(16px, 2.2vh, 22px) 0;
   text-transform: uppercase;
   user-select: none;
 }
 
-/* Technical Foundations Subheading */
-.hero-headline {
+/* Secondary Refined Label */
+.hero-role-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 18px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.68);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  box-shadow: 0 2px 10px rgba(13, 14, 20, 0.025), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   font-family: var(--font-mono);
-  font-size: clamp(0.85rem, 1.15vw, 1.05rem);
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-size: clamp(0.74rem, 0.9vw, 0.84rem);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: #475569;
   text-transform: uppercase;
-  color: var(--text-primary);
-  margin: 0 auto clamp(14px, 2vh, 20px) auto;
-  line-height: 1.4;
-  max-width: 52ch;
+  margin: 0 auto clamp(20px, 2.8vh, 28px) auto;
+  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s ease;
 }
 
+/* Supporting Elegant Sentence */
 .hero-subtitle {
   font-family: var(--font-sans);
-  font-size: clamp(0.92rem, 1.1vw, 1.05rem);
+  font-size: clamp(1.02rem, 1.25vw, 1.22rem);
   font-weight: 450;
   letter-spacing: -0.01em;
-  color: var(--text-secondary);
-  max-width: 54ch;
-  margin: 0 auto clamp(26px, 3.5vh, 38px) auto;
+  color: #334155;
+  max-width: 46ch;
+  margin: 0 auto clamp(30px, 4.2vh, 44px) auto;
   line-height: 1.55;
 }
 
@@ -992,17 +978,35 @@ body {
 }
 
 /* Orchestrated Cascading Load-in Sequence for the Hero */
-/* 1st: Role Label Capsule */
+/* 1st: Dominant SHIVA Title (Animated as a unified solid glyph block - zero distortion) */
+.hero-orchestrate-title {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(8px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.12s;
+  will-change: opacity, transform, filter;
+}
+
+.hero-orchestrated-active .hero-orchestrate-title {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+/* 2nd: Refined Secondary Role Label */
 .hero-orchestrate-label {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(16px);
   filter: blur(4px);
   position: relative;
   overflow: hidden;
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0.10s;
+  transition-delay: 0.26s;
 }
 
 .hero-orchestrated-active .hero-orchestrate-label {
@@ -1024,53 +1028,18 @@ body {
 }
 
 .hero-orchestrated-active .hero-orchestrate-label::after {
-  animation: glassShimmerSweep 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.32s 1 forwards;
+  animation: glassShimmerSweep 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.35s 1 forwards;
 }
 
-/* 2nd: Dominant SHIVA Title (Animated as a unified solid glyph block - zero distortion) */
-.hero-orchestrate-title {
-  opacity: 0;
-  transform: translateY(22px);
-  filter: blur(8px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0.26s;
-  will-change: opacity, transform, filter;
-}
-
-.hero-orchestrated-active .hero-orchestrate-title {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0px);
-}
-
-/* 3rd: Mathematical Foundations Technical Headline */
-.hero-orchestrate-headline {
-  opacity: 0;
-  transform: translateY(18px);
-  filter: blur(4px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0.42s;
-}
-
-.hero-orchestrated-active .hero-orchestrate-headline {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0px);
-}
-
-/* 4th: Description Paragraph */
+/* 3rd: Supporting Elegant Sentence */
 .hero-orchestrate-desc {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(16px);
   filter: blur(4px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0.58s;
+  transition-delay: 0.38s;
 }
 
 .hero-orchestrated-active .hero-orchestrate-desc {
@@ -1079,15 +1048,15 @@ body {
   filter: blur(0px);
 }
 
-/* 5th: Action Buttons */
+/* 4th: Action Buttons */
 .hero-orchestrate-actions {
   opacity: 0;
-  transform: translateY(18px);
+  transform: translateY(16px);
   filter: blur(4px);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0.74s;
+  transition-delay: 0.50s;
 }
 
 .hero-orchestrated-active .hero-orchestrate-actions {

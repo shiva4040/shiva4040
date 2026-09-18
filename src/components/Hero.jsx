@@ -91,27 +91,22 @@ export function Hero() {
         <HeroWaveform />
 
         <div className="hero-content" ref={contentRef}>
-          {/* 1. Role Badge */}
-          <div className="hero-glass-capsule hero-orchestrate-label">
-            <span className="mono-tag">AI / ML RESEARCHER · CREATIVE TECHNOLOGIST</span>
-          </div>
-
-          {/* 2. Dominant Title */}
+          {/* 1. Dominant Title */}
           <h1 className="hero-title hero-orchestrate-title" aria-label="SHIVA">
             SHIVA
           </h1>
 
-          {/* 3. Mathematical Foundations Tagline */}
-          <h2 className="hero-headline hero-orchestrate-headline">
-            MATHEMATICAL FOUNDATIONS OF INTELLIGENT SYSTEMS
-          </h2>
+          {/* 2. Secondary Refined Label */}
+          <div className="hero-role-label hero-orchestrate-label">
+            <span>AI / ML RESEARCHER</span>
+          </div>
 
-          {/* 4. Supporting Description */}
+          {/* 3. Supporting Elegant Sentence */}
           <p className="hero-subtitle hero-orchestrate-desc">
-            Investigating representation geometry, sample-efficient generalization, and loss landscapes at the intersection of deep learning theory and intelligent architectures.
+            Exploring intelligent systems through mathematics and machine learning.
           </p>
 
-          {/* 5. Tactile Glass Action Buttons */}
+          {/* 4. Action Buttons */}
           <div className="hero-actions hero-orchestrate-actions">
             <a
               href="#research"
@@ -139,15 +134,6 @@ export function Hero() {
             </a>
           </div>
         </div>
-
-        {/* 6. Refined Integrated Scroll Indicator */}
-        <a href="#research" className="hero-scroll-indicator" aria-label="Scroll down to explore research">
-          <span>SCROLL TO EXPLORE</span>
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <line x1="8" y1="2" x2="8" y2="12" />
-            <polyline points="4 8 8 12 12 8" />
-          </svg>
-        </a>
 
         <div className="hero-floor-overlay" aria-hidden="true" />
       </section>
