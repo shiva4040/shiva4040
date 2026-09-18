@@ -112,7 +112,7 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
             <li className="nav-item">
               <a
                 href="#contact"
-                className={`nav-glass-cta ${activeSection === 'contact' ? 'active' : ''}`}
+                className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`}
                 onMouseMove={handleCtaMouseMove}
                 onMouseLeave={handleCtaMouseLeave}
               >
