@@ -30,10 +30,10 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
     const rect = e.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    const rawDeltaX = (e.clientX - centerX) * 0.16;
-    const rawDeltaY = (e.clientY - centerY) * 0.16;
-    const deltaX = Math.max(-6, Math.min(6, rawDeltaX));
-    const deltaY = Math.max(-6, Math.min(6, rawDeltaY));
+    const rawDeltaX = (e.clientX - centerX) * 0.12;
+    const rawDeltaY = (e.clientY - centerY) * 0.12;
+    const deltaX = Math.max(-3, Math.min(3, rawDeltaX));
+    const deltaY = Math.max(-3, Math.min(3, rawDeltaY));
 
     const relX = ((e.clientX - rect.left) / rect.width) * 100;
     const relY = ((e.clientY - rect.top) / rect.height) * 100;
@@ -52,16 +52,16 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
     const rect = e.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
-    const rawDeltaX = (e.clientX - centerX) * 0.2;
-    const rawDeltaY = (e.clientY - centerY) * 0.2;
-    const deltaX = Math.max(-5, Math.min(5, rawDeltaX));
-    const deltaY = Math.max(-5, Math.min(5, rawDeltaY));
+    const rawDeltaX = (e.clientX - centerX) * 0.15;
+    const rawDeltaY = (e.clientY - centerY) * 0.15;
+    const deltaX = Math.max(-3, Math.min(3, rawDeltaX));
+    const deltaY = Math.max(-3, Math.min(3, rawDeltaY));
 
     const relX = ((e.clientX - rect.left) / rect.width) * 100;
     const relY = ((e.clientY - rect.top) / rect.height) * 100;
     e.currentTarget.style.setProperty('--spot-x', `${relX.toFixed(1)}%`);
     e.currentTarget.style.setProperty('--spot-y', `${relY.toFixed(1)}%`);
-    e.currentTarget.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(1.08)`;
+    e.currentTarget.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(1.04)`;
   };
 
   const handleSocialMouseLeave = (e) => {
@@ -112,7 +112,7 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
             <li className="nav-item">
               <a
                 href="#contact"
-                className={`nav-link ${activeSection === 'contact' ? 'active' : ''}`}
+                className={`nav-link nav-contact-pill ${activeSection === 'contact' ? 'active' : ''}`}
                 onMouseMove={handleCtaMouseMove}
                 onMouseLeave={handleCtaMouseLeave}
               >

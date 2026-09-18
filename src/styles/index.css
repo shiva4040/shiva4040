@@ -305,16 +305,16 @@ body {
   left: 0;
   width: 100%;
   z-index: 900;
-  padding: 18px 0;
+  padding: 16px 0;
   display: flex;
   justify-content: center;
   pointer-events: none;
   opacity: 0;
-  transform: translateY(-16px);
-  filter: blur(6px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(10px);
+  filter: blur(4px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .site-header.nav-mounted {
@@ -326,23 +326,22 @@ body {
 .nav-container {
   position: relative;
   overflow: hidden;
-  width: 86%;
-  max-width: 1180px;
+  width: min(1040px, 90vw);
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 11px 26px;
+  padding: 8px 22px;
   pointer-events: auto;
-  background: var(--glass-tier-chrome-bg);
-  backdrop-filter: var(--glass-tier-chrome-blur);
-  -webkit-backdrop-filter: var(--glass-tier-chrome-blur);
-  border: var(--glass-tier-chrome-border);
-  box-shadow: var(--glass-tier-chrome-shadow);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 20px rgba(13, 14, 20, 0.035), inset 0 1px 1px rgba(255, 255, 255, 0.95);
   border-radius: 100px;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background 0.35s ease,
+              box-shadow 0.35s ease,
+              border-color 0.35s ease;
 }
 
 /* Subtle Specular / Light Sweep across Nav on Entrance */
@@ -356,9 +355,9 @@ body {
   background: linear-gradient(
     105deg,
     transparent 20%,
-    rgba(255, 255, 255, 0.4) 44%,
-    rgba(255, 255, 255, 0.85) 50%,
-    rgba(255, 255, 255, 0.4) 56%,
+    rgba(255, 255, 255, 0.3) 45%,
+    rgba(255, 255, 255, 0.75) 50%,
+    rgba(255, 255, 255, 0.3) 55%,
     transparent 80%
   );
   transform: translateX(-140%) skewX(-20deg);
@@ -368,7 +367,7 @@ body {
 }
 
 .site-header.nav-mounted .nav-container::before {
-  animation: navGlassSweep 1.35s cubic-bezier(0.16, 1, 0.3, 1) 0.18s 1 forwards;
+  animation: navGlassSweep 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s 1 forwards;
 }
 
 @keyframes navGlassSweep {
@@ -376,22 +375,25 @@ body {
     transform: translateX(-140%) skewX(-20deg);
     opacity: 0;
   }
-  25% {
-    opacity: 0.6;
+  30% {
+    opacity: 0.7;
   }
   100% {
-    transform: translateX(240%) skewX(-20deg);
+    transform: translateX(180%) skewX(-20deg);
     opacity: 0;
   }
 }
 
 .site-header.scrolled .nav-container {
-  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 1), 0 16px 40px rgba(13, 14, 20, 0.08);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 30px rgba(13, 14, 20, 0.06), inset 0 1px 1px rgba(255, 255, 255, 1);
 }
 
 .nav-container:hover {
-  box-shadow: inset 0 1px 1.5px rgba(255, 255, 255, 1), 0 18px 48px rgba(13, 14, 20, 0.06), 0 2px 10px rgba(37, 99, 235, 0.04);
-  border-color: rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, 0.95);
 }
 
 .brand-wrapper {
@@ -404,36 +406,40 @@ body {
   align-items: center;
   font-family: var(--font-mono);
   font-weight: 700;
-  font-size: 0.86rem;
-  letter-spacing: 0.08em;
-  color: var(--text-primary);
+  font-size: 0.84rem;
+  letter-spacing: 0.09em;
+  color: #0D0E14;
   text-decoration: none;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              color 0.3s ease,
-              text-shadow 0.3s ease;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: transform 0.22s var(--ease-out-expo), color 0.2s ease;
   will-change: transform;
 }
 
 .brand-link:hover {
   transform: translateY(-0.5px);
-  color: var(--accent-azure);
-  text-shadow: 0 0 16px rgba(37, 99, 235, 0.25);
+  color: #000000;
 }
 
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* RESEARCH, CONCEPTS, ABOUT, CONTACT: Plain text normally -> Glass pill on hover */
+/* RESEARCH, CONCEPTS, ABOUT: Plain text normally -> Glass pill on hover
+   All items share fixed height: 34px and padding: 0 16px for zero layout shift */
 .nav-link {
   position: relative;
   overflow: hidden;
@@ -441,28 +447,25 @@ body {
   align-items: center;
   justify-content: center;
   height: 34px;
-  padding: 0 18px;
+  padding: 0 16px;
   border-radius: 100px;
   font-family: var(--font-mono);
-  font-size: 0.73rem;
+  font-size: 0.72rem;
   letter-spacing: 0.075em;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: #475569;
   text-decoration: none;
   background: transparent;
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
   border: 1px solid transparent;
-  box-shadow: inset 0 0 0 transparent, 0 0 0 transparent;
+  box-shadow: 0 0 0 transparent;
   cursor: pointer;
+  box-sizing: border-box;
   will-change: transform, background, border-color, box-shadow;
-  transition: background 220ms cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
-              backdrop-filter 220ms cubic-bezier(0.16, 1, 0.3, 1),
-              -webkit-backdrop-filter 220ms cubic-bezier(0.16, 1, 0.3, 1),
-              color 200ms ease,
-              transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background 200ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 200ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1),
+              color 180ms ease,
+              transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Specular droplet layer on hover */
@@ -471,21 +474,19 @@ body {
   position: absolute;
   inset: -1px;
   border-radius: inherit;
-  background: radial-gradient(circle 50px at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 255, 255, 0.95), transparent 85%);
+  background: radial-gradient(circle 48px at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 255, 255, 0.95), transparent 85%);
   opacity: 0;
-  transition: opacity 220ms ease;
+  transition: opacity 200ms ease;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Hover: Transforms into the exact same rounded glass pill style as CONTACT */
+/* Hover: Transforms into CONTACT-style glass pill */
 .nav-link:hover {
-  background: var(--glass-tier-control-bg);
-  backdrop-filter: var(--glass-tier-control-blur);
-  -webkit-backdrop-filter: var(--glass-tier-control-blur);
-  border: var(--glass-tier-control-border);
-  box-shadow: var(--glass-tier-control-shadow);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(13, 14, 20, 0.04), inset 0 1px 1px rgba(255, 255, 255, 1);
+  color: #0D0E14;
   font-weight: 600;
   transform: translateY(-1px);
 }
@@ -494,36 +495,58 @@ body {
   opacity: 0.75;
 }
 
-/* Active section indicator for unhovered state */
+/* CONTACT: Keeps existing rounded glass pill style normally */
+.nav-link.nav-contact-pill {
+  background: rgba(255, 255, 255, 0.74);
+  border-color: rgba(255, 255, 255, 0.90);
+  box-shadow: 0 2px 8px rgba(13, 14, 20, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  color: #0D0E14;
+  font-weight: 600;
+}
+
+/* CONTACT on hover: subtle lift and soft highlight */
+.nav-link.nav-contact-pill:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(13, 14, 20, 0.06), inset 0 1px 1px rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+}
+
+/* Active section indicator for plain-text links */
 .nav-link::after {
   content: '';
   position: absolute;
-  bottom: 2px;
+  bottom: 4px;
   left: 50%;
   transform: translateX(-50%);
   width: 0%;
   height: 2px;
   border-radius: 4px;
-  background: linear-gradient(90deg, #2563EB, #6366F1);
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.35);
-  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  background: #0D0E14;
+  transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
   opacity: 0;
   pointer-events: none;
 }
 
 .nav-link.active {
-  color: var(--text-primary);
+  color: #0D0E14;
   font-weight: 600;
 }
 
 .nav-link.active::after {
-  width: 22px;
-  opacity: 1;
+  width: 16px;
+  opacity: 0.85;
 }
 
-/* When hovered, hide the underline so the glass pill is the sole visual element */
+/* When hovered, hide the underline so the glass pill is clean without visual clutter */
 .nav-link:hover::after {
-  opacity: 0;
+  opacity: 0 !important;
+  width: 0 !important;
+}
+
+/* CONTACT pill does not use the bottom underline */
+.nav-link.nav-contact-pill::after {
+  display: none !important;
 }
 
 .nav-social-icon-btn::after {
@@ -534,8 +557,8 @@ body {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 10px;
-  margin-left: 6px;
+  gap: 8px;
+  margin-left: 8px;
   padding: 0 !important;
   list-style: none;
 }
@@ -546,30 +569,31 @@ body {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 36px !important;
-  height: 36px !important;
-  min-width: 36px !important;
-  min-height: 36px !important;
-  max-width: 36px !important;
-  max-height: 36px !important;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  min-height: 34px !important;
+  max-width: 34px !important;
+  max-height: 34px !important;
   padding: 0 !important;
   margin: 0 !important;
   border-radius: 50% !important;
   line-height: 0 !important;
   font-size: 0 !important;
   box-sizing: border-box !important;
-  background: var(--glass-tier-control-bg);
-  backdrop-filter: var(--glass-tier-control-blur);
-  -webkit-backdrop-filter: var(--glass-tier-control-blur);
-  border: var(--glass-tier-control-border);
-  box-shadow: var(--glass-tier-control-shadow);
-  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 8px rgba(13, 14, 20, 0.025), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  color: #334155;
   text-decoration: none !important;
   cursor: pointer;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 0.35s ease,
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.22s var(--ease-out-expo),
+              background 0.22s ease,
+              border-color 0.22s ease,
+              box-shadow 0.22s ease,
+              color 0.2s ease;
   will-change: transform;
 }
 
@@ -578,51 +602,69 @@ body {
   position: absolute;
   inset: -1px;
   border-radius: 50%;
-  background: radial-gradient(circle 28px at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.25) 60%, transparent 100%);
+  background: radial-gradient(circle 24px at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.2) 60%, transparent 100%);
   opacity: 0;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.25s ease;
   pointer-events: none;
   z-index: 0;
 }
 
+.nav-social-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #FFFFFF;
+  color: #0D0E14;
+  box-shadow: 0 4px 14px rgba(13, 14, 20, 0.05), inset 0 1px 1px rgba(255, 255, 255, 1);
+  transform: translateY(-1.5px) scale(1.04);
+}
+
+.nav-social-icon-btn:hover::before {
+  opacity: 0.85;
+}
+
 .nav-social-icon-btn svg {
-  width: 18px !important;
-  height: 18px !important;
+  width: 17px !important;
+  height: 17px !important;
   display: block !important;
-  margin: 0 auto !important;
+  margin: auto !important;
   padding: 0 !important;
   position: relative;
   z-index: 1;
   flex-shrink: 0;
   pointer-events: none;
   transform-origin: center center;
-  transition: transform 0.35s cubic-bezier(0.2, 1, 0.3, 1.2);
-}
-
-.nav-social-icon-btn:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(255, 255, 255, 1);
-  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 1),
-              inset 0 -1px 2px rgba(37, 99, 235, 0.08),
-              0 8px 22px rgba(37, 99, 235, 0.15),
-              0 2px 6px rgba(13, 14, 20, 0.04);
-}
-
-.nav-social-icon-btn:hover::before {
-  opacity: 0.9;
+  transition: transform 0.22s ease;
 }
 
 .nav-social-icon-btn:hover svg {
-  transform: scale(1.12);
+  transform: scale(1.06);
 }
 
 .mobile-toggle {
   display: none;
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
   cursor: pointer;
-  padding: 6px;
-  color: var(--text-primary);
+  padding: 0;
+  color: #0D0E14;
+  box-shadow: 0 2px 8px rgba(13, 14, 20, 0.025);
+  transition: background 0.2s ease, transform 0.2s ease;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-toggle:hover {
+  background: rgba(255, 255, 255, 0.95);
+  transform: scale(1.04);
+}
+
+.mobile-toggle svg {
+  width: 18px;
+  height: 18px;
 }
 
 .mobile-drawer {
@@ -2694,8 +2736,13 @@ body {
     display: none;
   }
 
+  .nav-container {
+    width: calc(100% - 28px);
+    padding: 8px 18px;
+  }
+
   .mobile-toggle {
-    display: block;
+    display: flex;
   }
 
   /* Mobile Stacking Cards Fallback: disable sticky stack to avoid viewport cramping */
