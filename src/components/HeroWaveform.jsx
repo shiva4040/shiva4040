@@ -260,7 +260,7 @@ export function HeroWaveform() {
           }
         }
         const midEnvelope = grid[Math.floor(CONFIG.lineCount / 2)][p].envelope;
-        const ribAlpha = midEnvelope * 0.12;
+        const ribAlpha = midEnvelope * 0.06;
         ctx.strokeStyle = `rgba(99, 102, 241, ${ribAlpha})`;
         ctx.stroke();
       }
@@ -280,21 +280,21 @@ export function HeroWaveform() {
         ctx.lineTo(row[CONFIG.pointsPerLine - 1].x, row[CONFIG.pointsPerLine - 1].y);
 
         const gradient = ctx.createLinearGradient(0, 0, width, 0);
-        gradient.addColorStop(0, 'rgba(13, 14, 20, 0.015)');
-        gradient.addColorStop(0.22, 'rgba(13, 14, 20, 0.1)');
+        gradient.addColorStop(0, 'rgba(13, 14, 20, 0.008)');
+        gradient.addColorStop(0.22, 'rgba(13, 14, 20, 0.05)');
 
         if (isCenterLine) {
-          gradient.addColorStop(0.48, 'rgba(99, 102, 241, 0.32)');
-          gradient.addColorStop(0.52, 'rgba(37, 99, 235, 0.28)');
+          gradient.addColorStop(0.48, 'rgba(99, 102, 241, 0.18)');
+          gradient.addColorStop(0.52, 'rgba(37, 99, 235, 0.16)');
         } else {
-          gradient.addColorStop(0.5, 'rgba(13, 14, 20, 0.22)');
+          gradient.addColorStop(0.5, 'rgba(13, 14, 20, 0.11)');
         }
 
-        gradient.addColorStop(0.78, 'rgba(13, 14, 20, 0.1)');
-        gradient.addColorStop(1, 'rgba(13, 14, 20, 0.015)');
+        gradient.addColorStop(0.78, 'rgba(13, 14, 20, 0.05)');
+        gradient.addColorStop(1, 'rgba(13, 14, 20, 0.008)');
 
         ctx.strokeStyle = gradient;
-        ctx.lineWidth = isCenterLine ? 1.15 : 0.85;
+        ctx.lineWidth = isCenterLine ? 1.0 : 0.75;
         ctx.stroke();
       }
 

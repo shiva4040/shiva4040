@@ -774,6 +774,21 @@ body {
   will-change: transform, opacity;
 }
 
+/* Soft ambient optical depth aura separating typography from background waveform */
+.hero-content::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(920px, 94vw);
+  height: 440px;
+  background: radial-gradient(ellipse at center, rgba(250, 250, 248, 0.94) 0%, rgba(250, 250, 248, 0.72) 48%, transparent 78%);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(28px);
+}
+
 /* Tier 1 Specular Micro-Glass Capsule */
 .hero-glass-capsule {
   display: inline-flex;
@@ -786,7 +801,7 @@ body {
   -webkit-backdrop-filter: var(--glass-tier-specular-blur);
   border: var(--glass-tier-specular-border);
   box-shadow: var(--glass-tier-specular-shadow);
-  margin-bottom: 24px;
+  margin-bottom: 22px;
   transition: transform 0.3s var(--ease-out-expo);
 }
 
@@ -798,18 +813,30 @@ body {
   font-weight: 600;
 }
 
-/* Fluid Dominant Big Typography */
+/* Fluid Dominant Big Typography - Pure Solid Ink (No Clipping/Masking Glitches) */
 .hero-title {
   font-family: var(--font-sans);
   font-size: var(--text-fluid-hero);
   font-weight: 800;
-  letter-spacing: -0.055em;
-  line-height: 0.86;
-  margin-bottom: 24px;
+  letter-spacing: -0.05em;
+  line-height: 0.88;
+  color: #0D0E14;
+  margin: 0 0 20px 0;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #0D0E14 20%, #2B2F3A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  user-select: none;
+}
+
+/* Technical Foundations Subheading */
+.hero-headline {
+  font-family: var(--font-mono);
+  font-size: clamp(0.92rem, 1.4vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin: 0 auto 16px auto;
+  line-height: 1.35;
+  max-width: 48ch;
 }
 
 /* Bouncing Scroll Indicator */
@@ -945,35 +972,17 @@ body {
 }
 
 /* Orchestrated Cascading Load-in Sequence for the Hero */
-.hero-title-char {
-  display: inline-block;
-  opacity: 0;
-  filter: blur(8px);
-  transform: translateY(18px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: calc(0.12s + var(--char-idx, 0) * 0.055s);
-  will-change: opacity, transform, filter;
-}
-
-.hero-orchestrated-active .hero-title-char {
-  opacity: 1;
-  filter: blur(0px);
-  transform: translateY(0);
-}
-
-/* 2nd: Role Label Capsule */
+/* 1st: Role Label Capsule */
 .hero-orchestrate-label {
   opacity: 0;
   transform: translateY(18px);
-  filter: blur(5px);
+  filter: blur(4px);
   position: relative;
   overflow: hidden;
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0.44s;
+  transition-delay: 0.10s;
 }
 
 .hero-orchestrated-active .hero-orchestrate-label {
@@ -995,10 +1004,45 @@ body {
 }
 
 .hero-orchestrated-active .hero-orchestrate-label::after {
-  animation: glassShimmerSweep 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.58s 1 forwards;
+  animation: glassShimmerSweep 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.32s 1 forwards;
 }
 
-/* 3rd: Description Subtitle */
+/* 2nd: Dominant SHIVA Title (Animated as a unified solid glyph block - zero distortion) */
+.hero-orchestrate-title {
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(8px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.26s;
+  will-change: opacity, transform, filter;
+}
+
+.hero-orchestrated-active .hero-orchestrate-title {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+/* 3rd: Mathematical Foundations Technical Headline */
+.hero-orchestrate-headline {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.42s;
+}
+
+.hero-orchestrated-active .hero-orchestrate-headline {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+/* 4th: Description Paragraph */
 .hero-orchestrate-desc {
   opacity: 0;
   transform: translateY(18px);
@@ -1015,7 +1059,7 @@ body {
   filter: blur(0px);
 }
 
-/* 4th: Actions & CTAs */
+/* 5th: Action Buttons */
 .hero-orchestrate-actions {
   opacity: 0;
   transform: translateY(18px);
@@ -1023,7 +1067,7 @@ body {
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
               filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  transition-delay: 0.72s;
+  transition-delay: 0.74s;
 }
 
 .hero-orchestrated-active .hero-orchestrate-actions {
@@ -2735,6 +2779,7 @@ body {
 
 @media (max-width: 480px) {
   :root {
+    --text-fluid-hero: clamp(3.6rem, 15vw, 5.2rem);
     --section-pad-y: 64px;
     --content-pad-x: 18px;
   }
@@ -2780,8 +2825,9 @@ body {
   .site-header,
   .site-header.nav-mounted,
   .nav-container::before,
-  .hero-title-char,
+  .hero-orchestrate-title,
   .hero-orchestrate-label,
+  .hero-orchestrate-headline,
   .hero-orchestrate-desc,
   .hero-orchestrate-actions,
   .hero-orchestrate-label::after,

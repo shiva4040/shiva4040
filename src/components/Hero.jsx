@@ -91,22 +91,27 @@ export function Hero() {
         <HeroWaveform />
 
         <div className="hero-content" ref={contentRef}>
-          <h1 className="hero-title hero-orchestrate-title" aria-label="SHIVA">
-            {'SHIVA'.split('').map((char, i) => (
-              <span key={i} className="hero-title-char" style={{ '--char-idx': i }}>
-                {char}
-              </span>
-            ))}
-          </h1>
-
+          {/* 1. Tag Capsule */}
           <div className="hero-glass-capsule hero-orchestrate-label">
-            <span className="mono-tag">AI &amp; Machine Learning Research · Mathematical Systems</span>
+            <span className="mono-tag">AI / ML RESEARCHER · CREATIVE TECHNOLOGIST</span>
           </div>
 
+          {/* 2. Dominant Title */}
+          <h1 className="hero-title hero-orchestrate-title" aria-label="SHIVA">
+            SHIVA
+          </h1>
+
+          {/* 3. Mathematical Foundations Headline */}
+          <h2 className="hero-headline hero-orchestrate-headline">
+            MATHEMATICAL FOUNDATIONS OF INTELLIGENT SYSTEMS
+          </h2>
+
+          {/* 4. Description */}
           <p className="hero-subtitle hero-orchestrate-desc">
-            Mathematical Foundations of Intelligent Systems
+            Investigating representation geometry, sample-efficient generalization, and loss landscapes at the intersection of deep learning theory and intelligent architectures.
           </p>
 
+          {/* 5. Actions */}
           <div className="hero-actions hero-orchestrate-actions">
             <a
               href="#research"
