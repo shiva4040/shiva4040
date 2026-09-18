@@ -51,14 +51,14 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
     const centerY = rect.top + rect.height / 2;
     const rawDeltaX = (e.clientX - centerX) * 0.12;
     const rawDeltaY = (e.clientY - centerY) * 0.12;
-    const deltaX = Math.max(-3, Math.min(3, rawDeltaX));
-    const deltaY = Math.max(-3, Math.min(3, rawDeltaY));
+    const deltaX = Math.max(-1.5, Math.min(1.5, rawDeltaX));
+    const deltaY = Math.max(-1.5, Math.min(1.5, rawDeltaY));
 
     const relX = ((e.clientX - rect.left) / rect.width) * 100;
     const relY = ((e.clientY - rect.top) / rect.height) * 100;
     e.currentTarget.style.setProperty('--spot-x', `${relX.toFixed(1)}%`);
     e.currentTarget.style.setProperty('--spot-y', `${relY.toFixed(1)}%`);
-    e.currentTarget.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
+    e.currentTarget.style.transform = `translate3d(${deltaX}px, calc(-1px + ${deltaY}px), 0)`;
   };
 
   const handleCtaMouseLeave = (e) => {

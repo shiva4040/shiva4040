@@ -176,7 +176,7 @@ body {
     width: 5px;
     height: 5px;
     background-color: var(--text-primary);
-    transition: opacity 0.2s ease, transform 0.08s ease-out;
+    transition: opacity 0.15s ease;
   }
 
   .cursor-ring {
@@ -184,15 +184,15 @@ body {
     height: 32px;
     border: 1px solid rgba(13, 14, 20, 0.22);
     background: transparent;
-    transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                height 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.3s ease,
-                background 0.3s ease;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.25s ease,
+                background 0.25s ease;
   }
 
   body.cursor-hover .cursor-ring {
-    width: 52px;
-    height: 52px;
+    width: 46px;
+    height: 46px;
     border-color: rgba(37, 99, 235, 0.55);
     background: rgba(37, 99, 235, 0.05);
     backdrop-filter: blur(1px);
@@ -200,7 +200,7 @@ body {
   }
 
   body.cursor-hover .cursor-dot {
-    opacity: 0.35;
+    opacity: 0 !important;
   }
 }
 

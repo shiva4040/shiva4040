@@ -22,7 +22,7 @@ export function CustomCursor() {
       mouseX = e.clientX;
       mouseY = e.clientY;
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+        dotRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%)`;
         dotRef.current.style.opacity = '1';
       }
       if (ringRef.current) {
@@ -41,10 +41,10 @@ export function CustomCursor() {
     };
 
     const renderCursor = () => {
-      ringX += (mouseX - ringX) * 0.18;
-      ringY += (mouseY - ringY) * 0.18;
+      ringX += (mouseX - ringX) * 0.22;
+      ringY += (mouseY - ringY) * 0.22;
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${ringX}px, ${ringY}px)`;
+        ringRef.current.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
       }
       animId = requestAnimationFrame(renderCursor);
     };
