@@ -218,18 +218,15 @@ body {
 .app-shell {
   min-height: 100vh;
   position: relative;
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .app-shell.page-initializing {
   opacity: 0.94;
-  filter: blur(4px);
 }
 
 .app-shell.page-loaded {
   opacity: 1;
-  filter: blur(0px);
 }
 
 /* ==========================================================================
@@ -323,16 +320,13 @@ body {
   pointer-events: none;
   opacity: 0;
   transform: translateY(-10px);
-  filter: blur(8px);
   transition: opacity 720ms cubic-bezier(0.16, 1, 0.3, 1),
-              transform 720ms cubic-bezier(0.16, 1, 0.3, 1),
-              filter 720ms cubic-bezier(0.16, 1, 0.3, 1);
+              transform 720ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .site-header.nav-mounted {
   opacity: 1;
   transform: translateY(0);
-  filter: blur(0px);
 }
 
 .nav-container {

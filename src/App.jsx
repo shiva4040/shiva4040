@@ -57,14 +57,14 @@ export function App() {
   }, []);
 
   return (
-    <div className={`app-shell ${isPageLoaded ? 'page-loaded' : 'page-initializing'}`}>
+    <>
       {/* Precision Custom Cursor */}
       <CustomCursor />
 
       {/* Top Reading Progress Bar */}
       <div className="scroll-progress-bar" id="scroll-progress" aria-hidden="true" />
 
-      {/* Floating Header */}
+      {/* Floating Header - Fixed Directly to Viewport */}
       <Header
         activeSection={activeSection}
         isMobileMenuOpen={isMobileMenuOpen}
@@ -77,28 +77,30 @@ export function App() {
         onClose={() => setIsMobileMenuOpen(false)}
       />
 
-      <main>
-        {/* Fixed Hero Section */}
-        <Hero />
+      <div className={`app-shell ${isPageLoaded ? 'page-loaded' : 'page-initializing'}`}>
+        <main>
+          {/* Hero Section */}
+          <Hero />
 
-        {/* Subsequent Content Curtain scrolls smoothly over Fixed Hero */}
-        <div className="content-curtain">
-          {/* Ambient Glowing Orbs Background for Frosted Glass Theme */}
-          <div className="ambient-orbs-container" aria-hidden="true">
-            <div className="ambient-glow-orb orb-violet" />
-            <div className="ambient-glow-orb orb-cyan" />
-            <div className="ambient-glow-orb orb-indigo" />
+          {/* Subsequent Content Curtain scrolls smoothly under Floating Header */}
+          <div className="content-curtain">
+            {/* Ambient Glowing Orbs Background for Frosted Glass Theme */}
+            <div className="ambient-orbs-container" aria-hidden="true">
+              <div className="ambient-glow-orb orb-violet" />
+              <div className="ambient-glow-orb orb-cyan" />
+              <div className="ambient-glow-orb orb-indigo" />
+            </div>
+
+            <Research />
+            <Projects />
+            <About />
+            <Contact />
           </div>
+        </main>
 
-          <Research />
-          <Projects />
-          <About />
-          <Contact />
-        </div>
-      </main>
-
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </>
   );
 }
 
