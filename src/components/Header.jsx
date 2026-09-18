@@ -43,26 +43,39 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
     };
   }, []);
 
-  // Water-fluid magnetic & specular droplet physics for CTA
+  // High-reliability smooth scroll navigation with header offset compensation
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    const element = document.getElementById(targetId);
+    if (element) {
+      const headerOffset = 84;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: Math.max(0, offsetPosition),
+        behavior: 'smooth'
+      });
+
+      try {
+        window.history.pushState(null, '', `#${targetId}`);
+      } catch (_) {}
+    }
+  };
+
+  // Specular droplet spotlight tracking for nav links
   const handleCtaMouseMove = (e) => {
     if (!window.matchMedia('(pointer: fine)').matches) return;
     const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const rawDeltaX = (e.clientX - centerX) * 0.12;
-    const rawDeltaY = (e.clientY - centerY) * 0.12;
-    const deltaX = Math.max(-1.5, Math.min(1.5, rawDeltaX));
-    const deltaY = Math.max(-1.5, Math.min(1.5, rawDeltaY));
-
     const relX = ((e.clientX - rect.left) / rect.width) * 100;
     const relY = ((e.clientY - rect.top) / rect.height) * 100;
     e.currentTarget.style.setProperty('--spot-x', `${relX.toFixed(1)}%`);
     e.currentTarget.style.setProperty('--spot-y', `${relY.toFixed(1)}%`);
-    e.currentTarget.style.transform = `translate3d(${deltaX}px, calc(-1px + ${deltaY}px), 0)`;
   };
 
   const handleCtaMouseLeave = (e) => {
-    e.currentTarget.style.transform = '';
+    e.currentTarget.style.removeProperty('--spot-x');
+    e.currentTarget.style.removeProperty('--spot-y');
   };
 
   // Water-fluid magnetic & droplet physics for Social Icons
@@ -73,14 +86,14 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
     const centerY = rect.top + rect.height / 2;
     const rawDeltaX = (e.clientX - centerX) * 0.15;
     const rawDeltaY = (e.clientY - centerY) * 0.15;
-    const deltaX = Math.max(-3, Math.min(3, rawDeltaX));
-    const deltaY = Math.max(-3, Math.min(3, rawDeltaY));
+    const deltaX = Math.max(-2.5, Math.min(2.5, rawDeltaX));
+    const deltaY = Math.max(-2.5, Math.min(2.5, rawDeltaY));
 
     const relX = ((e.clientX - rect.left) / rect.width) * 100;
     const relY = ((e.clientY - rect.top) / rect.height) * 100;
     e.currentTarget.style.setProperty('--spot-x', `${relX.toFixed(1)}%`);
     e.currentTarget.style.setProperty('--spot-y', `${relY.toFixed(1)}%`);
-    e.currentTarget.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0) scale(1.04)`;
+    e.currentTarget.style.transform = `translate3d(${deltaX}px, ${deltaY}px, 0)`;
   };
 
   const handleSocialMouseLeave = (e) => {
@@ -94,7 +107,12 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
     >
       <div className="nav-container">
         <div className="brand-wrapper">
-          <a href="#hero" className="brand-link" aria-label="Shiva Home">
+          <a
+            href="#hero"
+            className="brand-link"
+            aria-label="Shiva Home"
+            onClick={(e) => handleNavClick(e, 'hero')}
+          >
             <span>SHIVA</span>
           </a>
         </div>
@@ -105,6 +123,7 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
               <a
                 href="#research"
                 className={`nav-link ${activeSection === 'research' ? 'active' : ''}`}
+                onClick={(e) => handleNavClick(e, 'research')}
                 onMouseMove={handleCtaMouseMove}
                 onMouseLeave={handleCtaMouseLeave}
               >
@@ -115,6 +134,7 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
               <a
                 href="#projects"
                 className={`nav-link ${activeSection === 'projects' ? 'active' : ''}`}
+                onClick={(e) => handleNavClick(e, 'projects')}
                 onMouseMove={handleCtaMouseMove}
                 onMouseLeave={handleCtaMouseLeave}
               >
@@ -125,6 +145,7 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
               <a
                 href="#about"
                 className={`nav-link ${activeSection === 'about' ? 'active' : ''}`}
+                onClick={(e) => handleNavClick(e, 'about')}
                 onMouseMove={handleCtaMouseMove}
                 onMouseLeave={handleCtaMouseLeave}
               >
@@ -135,6 +156,7 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
               <a
                 href="#contact"
                 className={`nav-link nav-contact-pill ${activeSection === 'contact' ? 'active' : ''}`}
+                onClick={(e) => handleNavClick(e, 'contact')}
                 onMouseMove={handleCtaMouseMove}
                 onMouseLeave={handleCtaMouseLeave}
               >

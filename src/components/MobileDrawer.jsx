@@ -25,8 +25,26 @@ export function MobileDrawer({ isOpen, onClose }) {
     }
   }, [isOpen, onClose]);
 
-  const handleLinkClick = () => {
+  const handleLinkClick = (e, targetId) => {
+    e.preventDefault();
     onClose();
+    setTimeout(() => {
+      const element = document.getElementById(targetId);
+      if (element) {
+        const headerOffset = 84;
+        const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerOffset;
+
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: 'smooth'
+        });
+
+        try {
+          window.history.pushState(null, '', `#${targetId}`);
+        } catch (_) {}
+      }
+    }, 120);
   };
 
   return (
@@ -52,19 +70,19 @@ export function MobileDrawer({ isOpen, onClose }) {
 
       <nav className="mobile-drawer-nav" aria-label="Mobile Site Links">
         <div className="mobile-nav-item">
-          <a href="#hero" onClick={handleLinkClick}>Home</a>
+          <a href="#hero" onClick={(e) => handleLinkClick(e, 'hero')}>Home</a>
         </div>
         <div className="mobile-nav-item">
-          <a href="#research" onClick={handleLinkClick}>Research</a>
+          <a href="#research" onClick={(e) => handleLinkClick(e, 'research')}>Research</a>
         </div>
         <div className="mobile-nav-item">
-          <a href="#projects" onClick={handleLinkClick}>Concepts</a>
+          <a href="#projects" onClick={(e) => handleLinkClick(e, 'projects')}>Concepts</a>
         </div>
         <div className="mobile-nav-item">
-          <a href="#about" onClick={handleLinkClick}>About</a>
+          <a href="#about" onClick={(e) => handleLinkClick(e, 'about')}>About</a>
         </div>
         <div className="mobile-nav-item">
-          <a href="#contact" onClick={handleLinkClick} className="mobile-drawer-cta">
+          <a href="#contact" onClick={(e) => handleLinkClick(e, 'contact')} className="mobile-drawer-cta">
             Contact
           </a>
         </div>
