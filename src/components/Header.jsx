@@ -80,17 +80,32 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
         <nav aria-label="Main Navigation">
           <ul className="nav-menu">
             <li className="nav-item">
-              <a href="#research" className={activeSection === 'research' ? 'active' : ''}>
+              <a
+                href="#research"
+                className={`nav-link ${activeSection === 'research' ? 'active' : ''}`}
+                onMouseMove={handleCtaMouseMove}
+                onMouseLeave={handleCtaMouseLeave}
+              >
                 RESEARCH
               </a>
             </li>
             <li className="nav-item">
-              <a href="#projects" className={activeSection === 'projects' ? 'active' : ''}>
+              <a
+                href="#projects"
+                className={`nav-link ${activeSection === 'projects' ? 'active' : ''}`}
+                onMouseMove={handleCtaMouseMove}
+                onMouseLeave={handleCtaMouseLeave}
+              >
                 CONCEPTS
               </a>
             </li>
             <li className="nav-item">
-              <a href="#about" className={activeSection === 'about' ? 'active' : ''}>
+              <a
+                href="#about"
+                className={`nav-link ${activeSection === 'about' ? 'active' : ''}`}
+                onMouseMove={handleCtaMouseMove}
+                onMouseLeave={handleCtaMouseLeave}
+              >
                 ABOUT
               </a>
             </li>

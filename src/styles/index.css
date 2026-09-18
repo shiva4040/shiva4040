@@ -423,7 +423,7 @@ body {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 12px;
   list-style: none;
 }
 
@@ -433,74 +433,40 @@ body {
   list-style: none;
 }
 
-.nav-item > a:not(.nav-glass-cta):not(.nav-social-icon-btn) {
-  font-family: var(--font-mono);
-  font-size: 0.73rem;
-  letter-spacing: 0.075em;
-  color: var(--text-secondary);
-  position: relative;
-  padding: 7px 0;
-  font-weight: 500;
-  text-decoration: none;
-  display: inline-block;
-  transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
-}
-
-.nav-item a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0%;
-  height: 2px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #2563EB, #6366F1);
-  box-shadow: 0 0 8px rgba(37, 99, 235, 0.35);
-  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
-}
-
-.nav-item a:hover {
-  color: var(--text-primary);
-  transform: translateY(-1px);
-}
-
-.nav-item a:hover::after,
-.nav-item a.active::after {
-  width: 100%;
-}
-
-.nav-item a.active {
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.nav-glass-cta {
+/* RESEARCH, CONCEPTS, ABOUT: Plain text normally -> CONTACT-style glass pill on hover */
+.nav-link {
   position: relative;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 18px;
+  border-radius: 100px;
   font-family: var(--font-mono);
   font-size: 0.73rem;
   letter-spacing: 0.075em;
-  font-weight: 600;
-  padding: 8px 20px;
-  border-radius: 100px;
-  background: var(--glass-tier-control-bg);
-  backdrop-filter: var(--glass-tier-control-blur);
-  -webkit-backdrop-filter: var(--glass-tier-control-blur);
-  border: var(--glass-tier-control-border);
-  box-shadow: var(--glass-tier-control-shadow);
-  color: var(--text-primary);
+  font-weight: 500;
+  color: var(--text-secondary);
   text-decoration: none;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
-              border-color 0.35s ease,
-              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  background: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border: 1px solid transparent;
+  box-shadow: inset 0 0 0 transparent, 0 0 0 transparent;
   cursor: pointer;
-  will-change: transform;
+  will-change: transform, background, border-color, box-shadow;
+  transition: background 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              backdrop-filter 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              -webkit-backdrop-filter 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              color 200ms ease,
+              transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Specular droplet layer on hover */
+.nav-link::before,
 .nav-glass-cta::before {
   content: '';
   position: absolute;
@@ -508,9 +474,86 @@ body {
   border-radius: inherit;
   background: radial-gradient(circle 50px at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255, 255, 255, 0.95), transparent 85%);
   opacity: 0;
-  transition: opacity 0.35s ease;
+  transition: opacity 220ms ease;
   pointer-events: none;
   z-index: 0;
+}
+
+/* Hover: Transforms into the exact same rounded glass pill style as CONTACT */
+.nav-link:hover {
+  background: var(--glass-tier-control-bg);
+  backdrop-filter: var(--glass-tier-control-blur);
+  -webkit-backdrop-filter: var(--glass-tier-control-blur);
+  border: var(--glass-tier-control-border);
+  box-shadow: var(--glass-tier-control-shadow);
+  color: var(--text-primary);
+  font-weight: 600;
+  transform: translateY(-1px);
+}
+
+.nav-link:hover::before {
+  opacity: 0.75;
+}
+
+/* Active section indicator for unhovered state */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0%;
+  height: 2px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #2563EB, #6366F1);
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.35);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav-link.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  width: 22px;
+  opacity: 1;
+}
+
+/* When hovered, hide the underline so the glass pill is the sole visual element */
+.nav-link:hover::after {
+  opacity: 0;
+}
+
+/* CONTACT: Keeps its persistent glass pill style */
+.nav-glass-cta {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 20px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 0.73rem;
+  letter-spacing: 0.075em;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  background: var(--glass-tier-control-bg);
+  backdrop-filter: var(--glass-tier-control-blur);
+  -webkit-backdrop-filter: var(--glass-tier-control-blur);
+  border: var(--glass-tier-control-border);
+  box-shadow: var(--glass-tier-control-shadow);
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-glass-cta:hover {
