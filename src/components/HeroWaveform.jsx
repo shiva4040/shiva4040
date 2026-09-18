@@ -16,16 +16,16 @@ export function HeroWaveform() {
 
     const CONFIG = {
       lineCount: 18,
-      pointsPerLine: 80,
-      waveHeight: 88,
-      baseSpeed: 0.00065,
-      envelopeWidth: 0.38,
+      pointsPerLine: 84,
+      waveHeight: 104,
+      baseSpeed: 0.00095,
+      envelopeWidth: 0.46,
       crossLinesFreq: 6,
-      particleCount: 32,
+      particleCount: 40,
       floorLineCount: 12,
       floorVanishY: 0.74,
-      mouseRadius: 160,
-      mouseStrength: 35
+      mouseRadius: 180,
+      mouseStrength: 42
     };
 
     let width = 0;
@@ -48,15 +48,15 @@ export function HeroWaveform() {
 
     const initParticles = () => {
       particles = [];
-      const count = width < 768 ? 16 : CONFIG.particleCount;
+      const count = width < 768 ? 20 : CONFIG.particleCount;
       for (let i = 0; i < count; i++) {
         particles.push({
           lineIndex: Math.floor(Math.random() * CONFIG.lineCount),
-          normX: 0.3 + Math.random() * 0.4,
-          speed: 0.00015 + Math.random() * 0.0003,
-          size: 1.2 + Math.random() * 1.6,
+          normX: 0.22 + Math.random() * 0.56,
+          speed: 0.00018 + Math.random() * 0.00035,
+          size: 1.6 + Math.random() * 2.0,
           pulseOffset: Math.random() * Math.PI * 2,
-          accentType: Math.random() > 0.6 ? 'violet' : Math.random() > 0.3 ? 'blue' : 'gray'
+          accentType: Math.random() > 0.55 ? 'violet' : Math.random() > 0.3 ? 'blue' : 'gray'
         });
       }
     };
@@ -68,13 +68,13 @@ export function HeroWaveform() {
       height = rect.height;
 
       if (width < 768) {
-        CONFIG.lineCount = 13;
-        CONFIG.pointsPerLine = 50;
-        CONFIG.waveHeight = 65;
+        CONFIG.lineCount = 14;
+        CONFIG.pointsPerLine = 56;
+        CONFIG.waveHeight = 75;
       } else {
         CONFIG.lineCount = 18;
-        CONFIG.pointsPerLine = 80;
-        CONFIG.waveHeight = 88;
+        CONFIG.pointsPerLine = 84;
+        CONFIG.waveHeight = 104;
       }
 
       canvas.width = Math.floor(width * dpr);
@@ -120,7 +120,7 @@ export function HeroWaveform() {
       for (let i = 0; i < CONFIG.floorLineCount; i++) {
         const progress = Math.pow(i / (CONFIG.floorLineCount - 1), 2.4);
         const currentY = horizonY + progress * floorHeight;
-        const opacity = progress * 0.11;
+        const opacity = progress * 0.22;
 
         ctx.beginPath();
         ctx.moveTo(0, currentY);
@@ -136,8 +136,8 @@ export function HeroWaveform() {
         const bottomX = centerX + (j / (rayCount / 2)) * (width * 0.65);
         const grad = ctx.createLinearGradient(centerX, horizonY, bottomX, height);
         grad.addColorStop(0, 'rgba(13, 14, 20, 0)');
-        grad.addColorStop(0.3, 'rgba(13, 14, 20, 0.015)');
-        grad.addColorStop(1, 'rgba(13, 14, 20, 0.07)');
+        grad.addColorStop(0.3, 'rgba(13, 14, 20, 0.035)');
+        grad.addColorStop(1, 'rgba(13, 14, 20, 0.16)');
 
         ctx.beginPath();
         ctx.moveTo(centerX, horizonY);
@@ -246,7 +246,7 @@ export function HeroWaveform() {
         grid.push(row);
       }
 
-      ctx.lineWidth = 0.7;
+      ctx.lineWidth = 0.85;
       for (let p = 0; p < CONFIG.pointsPerLine; p += CONFIG.crossLinesFreq) {
         ctx.beginPath();
         let started = false;
@@ -260,7 +260,7 @@ export function HeroWaveform() {
           }
         }
         const midEnvelope = grid[Math.floor(CONFIG.lineCount / 2)][p].envelope;
-        const ribAlpha = midEnvelope * 0.06;
+        const ribAlpha = midEnvelope * 0.15;
         ctx.strokeStyle = `rgba(99, 102, 241, ${ribAlpha})`;
         ctx.stroke();
       }
@@ -280,21 +280,24 @@ export function HeroWaveform() {
         ctx.lineTo(row[CONFIG.pointsPerLine - 1].x, row[CONFIG.pointsPerLine - 1].y);
 
         const gradient = ctx.createLinearGradient(0, 0, width, 0);
-        gradient.addColorStop(0, 'rgba(13, 14, 20, 0.008)');
-        gradient.addColorStop(0.22, 'rgba(13, 14, 20, 0.05)');
-
         if (isCenterLine) {
-          gradient.addColorStop(0.48, 'rgba(99, 102, 241, 0.18)');
-          gradient.addColorStop(0.52, 'rgba(37, 99, 235, 0.16)');
+          gradient.addColorStop(0, 'rgba(79, 70, 229, 0.03)');
+          gradient.addColorStop(0.18, 'rgba(99, 102, 241, 0.16)');
+          gradient.addColorStop(0.38, 'rgba(99, 102, 241, 0.38)');
+          gradient.addColorStop(0.5, 'rgba(79, 70, 229, 0.46)');
+          gradient.addColorStop(0.62, 'rgba(37, 99, 235, 0.38)');
+          gradient.addColorStop(0.82, 'rgba(99, 102, 241, 0.16)');
+          gradient.addColorStop(1, 'rgba(79, 70, 229, 0.03)');
         } else {
-          gradient.addColorStop(0.5, 'rgba(13, 14, 20, 0.11)');
+          gradient.addColorStop(0, 'rgba(13, 14, 20, 0.025)');
+          gradient.addColorStop(0.2, 'rgba(13, 14, 20, 0.14)');
+          gradient.addColorStop(0.5, 'rgba(13, 14, 20, 0.28)');
+          gradient.addColorStop(0.8, 'rgba(13, 14, 20, 0.14)');
+          gradient.addColorStop(1, 'rgba(13, 14, 20, 0.025)');
         }
 
-        gradient.addColorStop(0.78, 'rgba(13, 14, 20, 0.05)');
-        gradient.addColorStop(1, 'rgba(13, 14, 20, 0.008)');
-
         ctx.strokeStyle = gradient;
-        ctx.lineWidth = isCenterLine ? 1.0 : 0.75;
+        ctx.lineWidth = isCenterLine ? 1.35 : 0.95;
         ctx.stroke();
       }
 
@@ -302,7 +305,7 @@ export function HeroWaveform() {
         const part = particles[i];
         if (!prefersReducedMotion) {
           part.normX += part.speed;
-          if (part.normX > 0.75) part.normX = 0.25;
+          if (part.normX > 0.8) part.normX = 0.2;
         }
 
         const l = Math.min(part.lineIndex, CONFIG.lineCount - 1);
@@ -316,21 +319,21 @@ export function HeroWaveform() {
           const px = ptA.x + (ptB.x - ptA.x) * frac;
           const py = ptA.y + (ptB.y - ptA.y) * frac;
 
-          const pulse = 0.5 + 0.5 * Math.sin(time * 2.5 + part.pulseOffset);
-          const radius = part.size * (0.8 + 0.3 * pulse);
+          const pulse = 0.5 + 0.5 * Math.sin(time * 2.8 + part.pulseOffset);
+          const radius = part.size * (0.85 + 0.35 * pulse);
 
-          let col = 'rgba(13, 14, 20, 0.35)';
-          let glowCol = 'rgba(13, 14, 20, 0.08)';
+          let col = 'rgba(13, 14, 20, 0.55)';
+          let glowCol = 'rgba(13, 14, 20, 0.18)';
           if (part.accentType === 'violet') {
-            col = `rgba(124, 58, 237, ${0.35 + 0.35 * pulse})`;
-            glowCol = 'rgba(124, 58, 237, 0.15)';
+            col = `rgba(124, 58, 237, ${0.55 + 0.35 * pulse})`;
+            glowCol = 'rgba(124, 58, 237, 0.25)';
           } else if (part.accentType === 'blue') {
-            col = `rgba(37, 99, 235, ${0.35 + 0.35 * pulse})`;
-            glowCol = 'rgba(37, 99, 235, 0.15)';
+            col = `rgba(37, 99, 235, ${0.55 + 0.35 * pulse})`;
+            glowCol = 'rgba(37, 99, 235, 0.25)';
           }
 
           ctx.beginPath();
-          ctx.arc(px, py, radius * 2.2, 0, Math.PI * 2);
+          ctx.arc(px, py, radius * 2.4, 0, Math.PI * 2);
           ctx.fillStyle = glowCol;
           ctx.fill();
 

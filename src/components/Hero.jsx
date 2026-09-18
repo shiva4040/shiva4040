@@ -140,15 +140,6 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Bouncing Scroll Indicator */}
-        <a href="#research" className="hero-scroll-indicator" aria-label="Scroll down to explore research">
-          <span>SCROLL TO EXPLORE</span>
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <line x1="8" y1="2" x2="8" y2="12" />
-            <polyline points="4 8 8 12 12 8" />
-          </svg>
-        </a>
-
         <div className="hero-floor-overlay" aria-hidden="true" />
       </section>
     </div>
