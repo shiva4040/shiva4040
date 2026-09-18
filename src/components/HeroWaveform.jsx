@@ -166,7 +166,10 @@ export function HeroWaveform() {
       ctx.restore();
     };
 
-    const getWavePoint = (xIndex, lineIndex, t) => {
+    let entranceStartTime = null;
+    const ENTRANCE_MS = 1600;
+
+    const getWavePoint = (xIndex, lineIndex, t, entranceProgress) => {
       const normX = xIndex / (CONFIG.pointsPerLine - 1);
       const px = normX * width;
       const centerY = height * 0.52;
@@ -181,7 +184,12 @@ export function HeroWaveform() {
       const w2 = Math.sin(normX * 12.0 - t * 1.1 + phaseOffset * 1.3) * 0.28;
       const w3 = Math.cos(normX * 20.0 + t * 2.0 + phaseOffset * 0.8) * 0.12;
 
-      let displacement = (w1 + w2 + w3) * CONFIG.waveHeight * envelope;
+      // Mathematical entrance: reveal progressive wave from left to right with settling harmonic dispersion
+      const revealThreshold = entranceProgress * 1.24;
+      const revealFactor = Math.min(1, Math.max(0, (revealThreshold - normX) / 0.2));
+      const distortion = (1 - entranceProgress) * Math.sin(normX * 12 + t * 3.5 + lineIndex * 0.25) * (CONFIG.waveHeight * 0.2 * (1 - entranceProgress));
+
+      let displacement = ((w1 + w2 + w3) * CONFIG.waveHeight * envelope * (0.35 + 0.65 * entranceProgress) + distortion) * revealFactor;
 
       if (mouse.x > -1000) {
         const dx = px - mouse.x;
@@ -198,7 +206,8 @@ export function HeroWaveform() {
       return {
         x: px,
         y: baseLineY + displacement,
-        envelope
+        envelope,
+        revealFactor
       };
     };
 
@@ -207,6 +216,11 @@ export function HeroWaveform() {
         animationFrameId = requestAnimationFrame(render);
         return;
       }
+
+      if (!entranceStartTime) entranceStartTime = timestamp;
+      const elapsed = timestamp - entranceStartTime;
+      const rawProgress = Math.min(1, elapsed / ENTRANCE_MS);
+      const entranceProgress = prefersReducedMotion ? 1 : 1 - Math.pow(1 - rawProgress, 3);
 
       time = prefersReducedMotion ? 0 : timestamp * CONFIG.baseSpeed;
 
@@ -219,6 +233,7 @@ export function HeroWaveform() {
       }
 
       ctx.clearRect(0, 0, width, height);
+      ctx.globalAlpha = 0.15 + 0.85 * entranceProgress;
 
       drawPerspectiveFloor();
 
@@ -226,7 +241,7 @@ export function HeroWaveform() {
       for (let l = 0; l < CONFIG.lineCount; l++) {
         const row = [];
         for (let p = 0; p < CONFIG.pointsPerLine; p++) {
-          row.push(getWavePoint(p, l, time));
+          row.push(getWavePoint(p, l, time, entranceProgress));
         }
         grid.push(row);
       }

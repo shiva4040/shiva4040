@@ -5,6 +5,13 @@ import React, { useState, useEffect } from 'react';
  */
 export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isNavMounted, setIsNavMounted] = useState(false);
+
+  useEffect(() => {
+    // Trigger smooth navigation materialization entrance
+    const timer = setTimeout(() => setIsNavMounted(true), 40);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,7 +69,7 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
   };
 
   return (
-    <header className={`site-header ${isScrolled ? 'scrolled' : ''}`} id="site-header">
+    <header className={`site-header ${isScrolled ? 'scrolled' : ''} ${isNavMounted ? 'nav-mounted' : ''}`} id="site-header">
       <div className="nav-container">
         <div className="brand-wrapper">
           <a href="#hero" className="brand-link" aria-label="Shiva Home">

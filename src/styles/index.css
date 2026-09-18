@@ -201,6 +201,26 @@ body {
 }
 
 /* ==========================================================================
+   PAGE-LOAD ATMOSPHERE & INITIAL STATE
+   ========================================================================== */
+.app-shell {
+  min-height: 100vh;
+  position: relative;
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.app-shell.page-initializing {
+  opacity: 0.94;
+  filter: blur(4px);
+}
+
+.app-shell.page-loaded {
+  opacity: 1;
+  filter: blur(0px);
+}
+
+/* ==========================================================================
    SCROLL PROGRESS BAR & AMBIENT GLOW ORBS
    ========================================================================== */
 .scroll-progress-bar {
@@ -289,9 +309,23 @@ body {
   display: flex;
   justify-content: center;
   pointer-events: none;
+  opacity: 0;
+  transform: translateY(-16px);
+  filter: blur(6px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-header.nav-mounted {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
 }
 
 .nav-container {
+  position: relative;
+  overflow: hidden;
   width: 86%;
   max-width: 1180px;
   margin: 0 auto;
@@ -309,6 +343,46 @@ body {
   transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Subtle Specular / Light Sweep across Nav on Entrance */
+.nav-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.4) 44%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.4) 56%,
+    transparent 80%
+  );
+  transform: translateX(-140%) skewX(-20deg);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+}
+
+.site-header.nav-mounted .nav-container::before {
+  animation: navGlassSweep 1.35s cubic-bezier(0.16, 1, 0.3, 1) 0.18s 1 forwards;
+}
+
+@keyframes navGlassSweep {
+  0% {
+    transform: translateX(-140%) skewX(-20deg);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(240%) skewX(-20deg);
+    opacity: 0;
+  }
 }
 
 .site-header.scrolled .nav-container {
@@ -847,38 +921,128 @@ body {
   transform: translateX(3px);
 }
 
-/* ONE Orchestrated Load-in Sequence for the Hero */
-.hero-orchestrate-1,
-.hero-orchestrate-2,
-.hero-orchestrate-3,
-.hero-orchestrate-4 {
+/* Orchestrated Cascading Load-in Sequence for the Hero */
+.hero-title-char {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(18px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(0.12s + var(--char-idx, 0) * 0.055s);
+  will-change: opacity, transform, filter;
+}
+
+.hero-orchestrated-active .hero-title-char {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+}
+
+/* 2nd: Role Label Capsule */
+.hero-orchestrate-label {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.85s var(--ease-out-expo), transform 0.85s var(--ease-out-expo);
+  filter: blur(5px);
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.44s;
 }
 
-.hero-orchestrated-active .hero-orchestrate-1 {
+.hero-orchestrated-active .hero-orchestrate-label {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.06s;
+  filter: blur(0px);
 }
 
-.hero-orchestrated-active .hero-orchestrate-2 {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.18s;
+.hero-orchestrate-label::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  transform: translateX(-120%);
+  pointer-events: none;
 }
 
-.hero-orchestrated-active .hero-orchestrate-3 {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: 0.32s;
+.hero-orchestrated-active .hero-orchestrate-label::after {
+  animation: glassShimmerSweep 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.58s 1 forwards;
 }
 
-.hero-orchestrated-active .hero-orchestrate-4 {
+/* 3rd: Description Subtitle */
+.hero-orchestrate-desc {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.58s;
+}
+
+.hero-orchestrated-active .hero-orchestrate-desc {
   opacity: 1;
   transform: translateY(0);
-  transition-delay: 0.46s;
+  filter: blur(0px);
+}
+
+/* 4th: Actions & CTAs */
+.hero-orchestrate-actions {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.72s;
+}
+
+.hero-orchestrated-active .hero-orchestrate-actions {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+
+/* Primary Glass Button subtle specular sweep on load */
+.glass-btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+
+.hero-orchestrated-active .glass-btn-primary::after {
+  animation: glassShimmerSweep 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.88s 1 forwards;
+}
+
+@keyframes glassShimmerSweep {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+  35% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
 }
 
 /* ==========================================================================
@@ -2209,6 +2373,187 @@ body {
 }
 
 /* ==========================================================================
+   SCROLL-TRIGGERED ENTRANCE ANIMATIONS (TAILORED PER COMPONENT)
+   ========================================================================== */
+
+/* 1. Asymmetric Section Headers */
+.section-header-grid .section-category-tag,
+.section-header-grid .section-title,
+.section-header-grid .section-description,
+.section-header-grid .section-header-metric {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(4px);
+  transition: opacity 0.75s var(--ease-out-expo),
+              transform 0.75s var(--ease-out-expo),
+              filter 0.75s var(--ease-out-expo);
+  will-change: opacity, transform, filter;
+}
+
+.section-header-grid.revealed .section-category-tag {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.04s;
+}
+
+.section-header-grid.revealed .section-title {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.12s;
+}
+
+.section-header-grid.revealed .section-description {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.20s;
+}
+
+.section-header-grid.revealed .section-header-metric {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.28s;
+}
+
+/* 2. Research Bento Grid Reveal */
+.research-bento-grid .research-bento-featured,
+.research-bento-grid .research-bento-quote,
+.research-bento-grid .research-bento-card {
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(4px);
+  transition: opacity 0.8s var(--ease-out-expo),
+              transform 0.8s var(--ease-out-expo),
+              filter 0.8s var(--ease-out-expo),
+              box-shadow 0.4s ease,
+              border-color 0.4s ease;
+  will-change: opacity, transform, filter;
+}
+
+.research-bento-grid.revealed .research-bento-featured {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.06s;
+}
+
+.research-bento-grid.revealed .research-bento-quote {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.16s;
+}
+
+.research-bento-grid.revealed .research-bento-card:nth-of-type(1) {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.24s;
+}
+
+.research-bento-grid.revealed .research-bento-card:nth-of-type(2) {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.32s;
+}
+
+.research-bento-grid.revealed .research-bento-card:nth-of-type(3) {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.40s;
+}
+
+/* 3. Project Deck Stacking Cards Initial Viewport Entrance */
+.project-stack-card {
+  opacity: 0;
+  transform: translateY(26px) scale(0.985);
+  filter: blur(5px);
+  transition: opacity 0.85s var(--ease-out-expo),
+              transform 0.85s var(--ease-out-expo),
+              filter 0.85s var(--ease-out-expo);
+  will-change: opacity, transform, filter;
+}
+
+.project-stack-card.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* 4. About Editorial Grid Reveal */
+.about-editorial-grid .about-bio-column,
+.about-editorial-grid .about-pillars-column {
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(4px);
+  transition: opacity 0.8s var(--ease-out-expo),
+              transform 0.8s var(--ease-out-expo),
+              filter 0.8s var(--ease-out-expo);
+  will-change: opacity, transform, filter;
+}
+
+.about-editorial-grid.revealed .about-bio-column {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.08s;
+}
+
+.about-editorial-grid.revealed .about-pillars-column {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.22s;
+}
+
+/* 5. Contact Manifesto & Terminal Reveal */
+.contact-manifesto-grid .manifesto-narrative-column,
+.contact-manifesto-grid .contact-terminal-wrapper {
+  opacity: 0;
+  transform: translateY(22px);
+  filter: blur(4px);
+  transition: opacity 0.8s var(--ease-out-expo),
+              transform 0.8s var(--ease-out-expo),
+              filter 0.8s var(--ease-out-expo);
+  will-change: opacity, transform, filter;
+}
+
+.contact-manifesto-grid.revealed .manifesto-narrative-column {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.08s;
+}
+
+.contact-manifesto-grid.revealed .contact-terminal-wrapper {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition-delay: 0.22s;
+}
+
+/* General reveal-on-scroll */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(3px);
+  transition: opacity 0.75s var(--ease-out-expo),
+              transform 0.75s var(--ease-out-expo),
+              filter 0.75s var(--ease-out-expo);
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN & MOBILE FALLBACKS
    ========================================================================== */
 @media (max-width: 1024px) {
@@ -2406,12 +2751,37 @@ body {
     scroll-behavior: auto !important;
   }
 
-  .hero-orchestrate-1,
-  .hero-orchestrate-2,
-  .hero-orchestrate-3,
-  .hero-orchestrate-4 {
+  .app-shell,
+  .app-shell.page-initializing,
+  .app-shell.page-loaded,
+  .site-header,
+  .site-header.nav-mounted,
+  .nav-container::before,
+  .hero-title-char,
+  .hero-orchestrate-label,
+  .hero-orchestrate-desc,
+  .hero-orchestrate-actions,
+  .hero-orchestrate-label::after,
+  .glass-btn-primary::after,
+  .hero-scroll-indicator,
+  .section-header-grid .section-category-tag,
+  .section-header-grid .section-title,
+  .section-header-grid .section-description,
+  .section-header-grid .section-header-metric,
+  .research-bento-grid .research-bento-featured,
+  .research-bento-grid .research-bento-quote,
+  .research-bento-grid .research-bento-card,
+  .project-stack-card,
+  .about-editorial-grid .about-bio-column,
+  .about-editorial-grid .about-pillars-column,
+  .contact-manifesto-grid .manifesto-narrative-column,
+  .contact-manifesto-grid .contact-terminal-wrapper,
+  .reveal-on-scroll {
     opacity: 1 !important;
     transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    animation: none !important;
   }
 
   .project-stack-card {

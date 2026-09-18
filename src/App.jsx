@@ -9,6 +9,7 @@ import { About } from './components/About';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 import { useScrollSpy } from './hooks/useScrollSpy';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 const SECTION_IDS = ['hero', 'research', 'projects', 'about', 'contact'];
 
@@ -18,7 +19,17 @@ const SECTION_IDS = ['hero', 'research', 'projects', 'about', 'contact'];
  */
 export function App() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
   const activeSection = useScrollSpy(SECTION_IDS, 160);
+
+  // Initialize scroll-triggered animations
+  useScrollReveal();
+
+  // Trigger page-load transition on initial mount
+  useEffect(() => {
+    const timer = setTimeout(() => setIsPageLoaded(true), 40);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Smooth scroll reading progress bar
   useEffect(() => {
@@ -46,7 +57,7 @@ export function App() {
   }, []);
 
   return (
-    <>
+    <div className={`app-shell ${isPageLoaded ? 'page-loaded' : 'page-initializing'}`}>
       {/* Precision Custom Cursor */}
       <CustomCursor />
 
@@ -87,7 +98,7 @@ export function App() {
       </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -6,7 +6,18 @@ import { useEffect } from 'react';
  */
 export function useScrollReveal() {
   useEffect(() => {
-    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      document.querySelectorAll(
+        '.reveal-on-scroll, .section-header-grid, .research-bento-grid, .project-stack-card, .about-editorial-grid, .contact-manifesto-grid'
+      ).forEach((el) => el.classList.add('revealed'));
+      return;
+    }
+
+    const targets = document.querySelectorAll(
+      '.reveal-on-scroll, .section-header-grid, .research-bento-grid, .project-stack-card, .about-editorial-grid, .contact-manifesto-grid'
+    );
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -22,7 +33,7 @@ export function useScrollReveal() {
       }
     );
 
-    revealElements.forEach((el) => observer.observe(el));
+    targets.forEach((el) => observer.observe(el));
 
     return () => {
       observer.disconnect();

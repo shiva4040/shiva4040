@@ -91,19 +91,23 @@ export function Hero() {
         <HeroWaveform />
 
         <div className="hero-content" ref={contentRef}>
-          <div className="hero-glass-capsule hero-orchestrate-1">
+          <h1 className="hero-title hero-orchestrate-title" aria-label="SHIVA">
+            {'SHIVA'.split('').map((char, i) => (
+              <span key={i} className="hero-title-char" style={{ '--char-idx': i }}>
+                {char}
+              </span>
+            ))}
+          </h1>
+
+          <div className="hero-glass-capsule hero-orchestrate-label">
             <span className="mono-tag">AI &amp; Machine Learning Research · Mathematical Systems</span>
           </div>
 
-          <h1 className="hero-title hero-orchestrate-2">
-            SHIVA
-          </h1>
-
-          <p className="hero-subtitle hero-orchestrate-3">
+          <p className="hero-subtitle hero-orchestrate-desc">
             Mathematical Foundations of Intelligent Systems
           </p>
 
-          <div className="hero-actions hero-orchestrate-4">
+          <div className="hero-actions hero-orchestrate-actions">
             <a
               href="#research"
               className="glass-btn glass-btn-primary"
