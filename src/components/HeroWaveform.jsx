@@ -16,16 +16,16 @@ export function HeroWaveform() {
 
     const CONFIG = {
       lineCount: 16,
-      pointsPerLine: 82,
-      waveHeight: 90,
-      baseSpeed: 0.00062,
-      envelopeWidth: 0.44,
+      pointsPerLine: 88,
+      waveHeight: 108,
+      baseSpeed: 0.00086,
+      envelopeWidth: 0.54,
       crossLinesFreq: 6,
-      particleCount: 26,
+      particleCount: 32,
       floorLineCount: 12,
       floorVanishY: 0.74,
-      mouseRadius: 170,
-      mouseStrength: 36
+      mouseRadius: 180,
+      mouseStrength: 42
     };
 
     let width = 0;
@@ -48,13 +48,13 @@ export function HeroWaveform() {
 
     const initParticles = () => {
       particles = [];
-      const count = width < 768 ? 14 : CONFIG.particleCount;
+      const count = width < 768 ? 18 : CONFIG.particleCount;
       for (let i = 0; i < count; i++) {
         particles.push({
           lineIndex: Math.floor(Math.random() * CONFIG.lineCount),
-          normX: 0.20 + Math.random() * 0.60,
-          speed: 0.00014 + Math.random() * 0.00028,
-          size: 1.4 + Math.random() * 1.6,
+          normX: 0.12 + Math.random() * 0.76,
+          speed: 0.00016 + Math.random() * 0.00032,
+          size: 1.8 + Math.random() * 2.0,
           pulseOffset: Math.random() * Math.PI * 2,
           accentType: Math.random() > 0.55 ? 'violet' : Math.random() > 0.3 ? 'blue' : 'gray'
         });
@@ -68,13 +68,13 @@ export function HeroWaveform() {
       height = rect.height;
 
       if (width < 768) {
-        CONFIG.lineCount = 12;
-        CONFIG.pointsPerLine = 52;
-        CONFIG.waveHeight = 65;
+        CONFIG.lineCount = 13;
+        CONFIG.pointsPerLine = 56;
+        CONFIG.waveHeight = 80;
       } else {
         CONFIG.lineCount = 16;
-        CONFIG.pointsPerLine = 82;
-        CONFIG.waveHeight = 90;
+        CONFIG.pointsPerLine = 88;
+        CONFIG.waveHeight = 108;
       }
 
       canvas.width = Math.floor(width * dpr);
@@ -118,14 +118,14 @@ export function HeroWaveform() {
 
       // Horizontal depth lines
       for (let i = 0; i < CONFIG.floorLineCount; i++) {
-        const progress = Math.pow(i / (CONFIG.floorLineCount - 1), 2.4);
+        const progress = Math.pow(i / (CONFIG.floorLineCount - 1), 2.2);
         const currentY = horizonY + progress * floorHeight;
-        const opacity = progress * 0.16;
+        const opacity = progress * 0.28;
 
         ctx.beginPath();
         ctx.moveTo(0, currentY);
         ctx.lineTo(width, currentY);
-        ctx.strokeStyle = `rgba(13, 14, 20, ${opacity})`;
+        ctx.strokeStyle = `rgba(13, 14, 20, ${opacity.toFixed(3)})`;
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -136,8 +136,8 @@ export function HeroWaveform() {
         const bottomX = centerX + (j / (rayCount / 2)) * (width * 0.65);
         const grad = ctx.createLinearGradient(centerX, horizonY, bottomX, height);
         grad.addColorStop(0, 'rgba(13, 14, 20, 0)');
-        grad.addColorStop(0.3, 'rgba(13, 14, 20, 0.02)');
-        grad.addColorStop(1, 'rgba(13, 14, 20, 0.10)');
+        grad.addColorStop(0.3, 'rgba(13, 14, 20, 0.05)');
+        grad.addColorStop(1, 'rgba(13, 14, 20, 0.18)');
 
         ctx.beginPath();
         ctx.moveTo(centerX, horizonY);
@@ -246,7 +246,7 @@ export function HeroWaveform() {
         grid.push(row);
       }
 
-      ctx.lineWidth = 0.75;
+      ctx.lineWidth = 1.0;
       for (let p = 0; p < CONFIG.pointsPerLine; p += CONFIG.crossLinesFreq) {
         ctx.beginPath();
         let started = false;
@@ -263,7 +263,7 @@ export function HeroWaveform() {
         const normP = p / (CONFIG.pointsPerLine - 1);
         const centerDistance = Math.abs(normP - 0.5);
         const centerFactor = Math.min(1, centerDistance * 2.8);
-        const ribAlpha = midEnvelope * (0.04 + 0.08 * centerFactor);
+        const ribAlpha = midEnvelope * (0.08 + 0.16 * centerFactor);
         ctx.strokeStyle = `rgba(99, 102, 241, ${ribAlpha.toFixed(3)})`;
         ctx.stroke();
       }
@@ -285,28 +285,28 @@ export function HeroWaveform() {
 
         const gradient = ctx.createLinearGradient(0, 0, width, 0);
         if (isCenterLine) {
-          gradient.addColorStop(0, 'rgba(79, 70, 229, 0.02)');
-          gradient.addColorStop(0.18, 'rgba(99, 102, 241, 0.24)');
-          gradient.addColorStop(0.32, 'rgba(99, 102, 241, 0.26)');
-          gradient.addColorStop(0.44, 'rgba(99, 102, 241, 0.12)');
-          gradient.addColorStop(0.50, 'rgba(79, 70, 229, 0.09)');
-          gradient.addColorStop(0.56, 'rgba(37, 99, 235, 0.12)');
-          gradient.addColorStop(0.68, 'rgba(37, 99, 235, 0.26)');
-          gradient.addColorStop(0.82, 'rgba(99, 102, 241, 0.24)');
-          gradient.addColorStop(1, 'rgba(79, 70, 229, 0.02)');
+          gradient.addColorStop(0, 'rgba(79, 70, 229, 0.08)');
+          gradient.addColorStop(0.14, 'rgba(99, 102, 241, 0.52)');
+          gradient.addColorStop(0.28, 'rgba(99, 102, 241, 0.62)');
+          gradient.addColorStop(0.42, 'rgba(99, 102, 241, 0.30)');
+          gradient.addColorStop(0.50, 'rgba(79, 70, 229, 0.24)');
+          gradient.addColorStop(0.58, 'rgba(37, 99, 235, 0.30)');
+          gradient.addColorStop(0.72, 'rgba(37, 99, 235, 0.62)');
+          gradient.addColorStop(0.86, 'rgba(99, 102, 241, 0.52)');
+          gradient.addColorStop(1, 'rgba(79, 70, 229, 0.08)');
         } else {
-          const depthAlpha = Math.max(0.08, 0.22 - layerDepth * 0.09);
-          const centerAlpha = depthAlpha * 0.45;
-          gradient.addColorStop(0, 'rgba(15, 23, 42, 0.015)');
-          gradient.addColorStop(0.20, `rgba(15, 23, 42, ${depthAlpha.toFixed(3)})`);
+          const depthAlpha = Math.max(0.22, 0.48 - layerDepth * 0.18);
+          const centerAlpha = depthAlpha * 0.48;
+          gradient.addColorStop(0, 'rgba(15, 23, 42, 0.05)');
+          gradient.addColorStop(0.16, `rgba(15, 23, 42, ${depthAlpha.toFixed(3)})`);
           gradient.addColorStop(0.44, `rgba(15, 23, 42, ${centerAlpha.toFixed(3)})`);
           gradient.addColorStop(0.56, `rgba(15, 23, 42, ${centerAlpha.toFixed(3)})`);
-          gradient.addColorStop(0.80, `rgba(15, 23, 42, ${depthAlpha.toFixed(3)})`);
-          gradient.addColorStop(1, 'rgba(15, 23, 42, 0.015)');
+          gradient.addColorStop(0.84, `rgba(15, 23, 42, ${depthAlpha.toFixed(3)})`);
+          gradient.addColorStop(1, 'rgba(15, 23, 42, 0.05)');
         }
 
         ctx.strokeStyle = gradient;
-        ctx.lineWidth = isCenterLine ? 1.15 : 0.85;
+        ctx.lineWidth = isCenterLine ? 1.65 : 1.25;
         ctx.stroke();
       }
 
@@ -314,7 +314,7 @@ export function HeroWaveform() {
         const part = particles[i];
         if (!prefersReducedMotion) {
           part.normX += part.speed;
-          if (part.normX > 0.8) part.normX = 0.2;
+          if (part.normX > 0.85) part.normX = 0.15;
         }
 
         const l = Math.min(part.lineIndex, CONFIG.lineCount - 1);
@@ -329,20 +329,20 @@ export function HeroWaveform() {
           const py = ptA.y + (ptB.y - ptA.y) * frac;
 
           const pulse = 0.5 + 0.5 * Math.sin(time * 2.2 + part.pulseOffset);
-          const radius = part.size * (0.8 + 0.25 * pulse);
+          const radius = part.size * (0.85 + 0.3 * pulse);
 
-          let col = 'rgba(15, 23, 42, 0.42)';
-          let glowCol = 'rgba(15, 23, 42, 0.10)';
+          let col = `rgba(15, 23, 42, ${(0.65 + 0.22 * pulse).toFixed(3)})`;
+          let glowCol = 'rgba(15, 23, 42, 0.18)';
           if (part.accentType === 'violet') {
-            col = `rgba(99, 102, 241, ${(0.42 + 0.22 * pulse).toFixed(3)})`;
-            glowCol = 'rgba(99, 102, 241, 0.15)';
+            col = `rgba(99, 102, 241, ${(0.72 + 0.24 * pulse).toFixed(3)})`;
+            glowCol = 'rgba(99, 102, 241, 0.24)';
           } else if (part.accentType === 'blue') {
-            col = `rgba(37, 99, 235, ${(0.42 + 0.22 * pulse).toFixed(3)})`;
-            glowCol = 'rgba(37, 99, 235, 0.15)';
+            col = `rgba(37, 99, 235, ${(0.72 + 0.24 * pulse).toFixed(3)})`;
+            glowCol = 'rgba(37, 99, 235, 0.24)';
           }
 
           ctx.beginPath();
-          ctx.arc(px, py, radius * 2.0, 0, Math.PI * 2);
+          ctx.arc(px, py, radius * 2.2, 0, Math.PI * 2);
           ctx.fillStyle = glowCol;
           ctx.fill();
 

@@ -822,12 +822,12 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(840px, 92vw);
-  height: 380px;
-  background: radial-gradient(ellipse 620px 300px at center, rgba(250, 250, 248, 0.94) 0%, rgba(250, 250, 248, 0.62) 45%, rgba(250, 250, 248, 0.10) 75%, transparent 100%);
+  width: min(640px, 86vw);
+  height: 260px;
+  background: radial-gradient(ellipse 480px 200px at center, rgba(250, 250, 248, 0.82) 0%, rgba(250, 250, 248, 0.35) 55%, transparent 80%);
   pointer-events: none;
   z-index: -1;
-  filter: blur(28px);
+  filter: blur(20px);
 }
 
 /* Fluid Dominant Big Typography - Pure Solid Ink (Focal Centerpiece) */
