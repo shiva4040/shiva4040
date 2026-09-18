@@ -103,7 +103,7 @@ export function Hero() {
 
           {/* 3. Supporting Elegant Sentence */}
           <p className="hero-subtitle hero-orchestrate-desc">
-            Exploring intelligent systems through mathematics and machine learning.
+            Mathematical Foundations of Intelligent Systems
           </p>
 
           {/* 4. Action Buttons */}
