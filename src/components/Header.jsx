@@ -1,27 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 /**
  * Floating frosted glass header with brand link, nav menu, and mobile hamburger button.
  */
 export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
   const [isNavMounted, setIsNavMounted] = useState(false);
+  const scrollTimeoutRef = useRef(null);
 
   useEffect(() => {
-    // Trigger smooth navigation materialization entrance
-    const timer = setTimeout(() => setIsNavMounted(true), 40);
+    // Trigger smooth navigation entrance (start slightly above, fade & blur in down into position)
+    const timer = setTimeout(() => setIsNavMounted(true), 60);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
+      const scrollY = window.scrollY;
+      setIsScrolled(scrollY > 20);
+
+      // Indicate active scroll in progress
+      setIsScrolling(true);
+
+      // Smoothly settle into resting glass state when scrolling stops
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      scrollTimeoutRef.current = setTimeout(() => {
+        setIsScrolling(false);
+      }, 160);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
   }, []);
 
   // Water-fluid magnetic & specular droplet physics for CTA
@@ -69,7 +88,10 @@ export function Header({ activeSection, onToggleMobileMenu, isMobileMenuOpen }) 
   };
 
   return (
-    <header className={`site-header ${isScrolled ? 'scrolled' : ''} ${isNavMounted ? 'nav-mounted' : ''}`} id="site-header">
+    <header
+      className={`site-header ${isScrolled ? 'scrolled' : ''} ${isScrolling ? 'is-scrolling' : ''} ${isNavMounted ? 'nav-mounted' : ''}`}
+      id="site-header"
+    >
       <div className="nav-container">
         <div className="brand-wrapper">
           <a href="#hero" className="brand-link" aria-label="Shiva Home">
