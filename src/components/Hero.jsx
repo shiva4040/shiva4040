@@ -19,51 +19,6 @@ export function Hero() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Performant scroll-linked opacity & parallax fade for fixed hero architecture
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-
-    let rafId = null;
-
-    const handleScroll = () => {
-      if (rafId) return;
-      rafId = requestAnimationFrame(() => {
-        rafId = null;
-        const heroHeight = window.innerHeight || 800;
-        const scrollY = window.scrollY || window.pageYOffset;
-        const progress = Math.min(1, Math.max(0, scrollY / heroHeight));
-
-        // Manage fixed hero visibility & pointer events so background clicks never intercept content
-        if (sectionRef.current) {
-          if (progress >= 0.98) {
-            sectionRef.current.style.pointerEvents = 'none';
-            sectionRef.current.style.opacity = '0';
-          } else {
-            sectionRef.current.style.pointerEvents = 'auto';
-            sectionRef.current.style.opacity = '1';
-          }
-        }
-
-        // Downward parallax and gentle scale-down as curtain smoothly scrolls over
-        if (contentRef.current) {
-          const translateY = (progress * 110).toFixed(2);
-          const scale = (1 - progress * 0.08).toFixed(3);
-          const opacity = Math.max(0, 1 - progress * 1.35).toFixed(3);
-
-          contentRef.current.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
-          contentRef.current.style.opacity = opacity;
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, []);
-
   // Tactile micro-magnetic movement on button hover (subtle 3-4px range)
   const handleBtnMouseMove = (e) => {
     if (!window.matchMedia('(pointer: fine)').matches) return;

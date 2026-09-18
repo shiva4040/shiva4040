@@ -417,6 +417,35 @@ body {
   box-shadow: 0 10px 32px rgba(13, 14, 20, 0.075), inset 0 1px 2px rgba(255, 255, 255, 1);
 }
 
+/* Real-time glass specular highlight shift during active scrolling */
+.nav-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.15) 46%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0.15) 54%,
+    transparent 80%
+  );
+  transform: translateX(-120%) skewX(-18deg);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s ease;
+}
+
+.site-header.is-scrolling .nav-container::after {
+  opacity: 0.85;
+  transform: translateX(20%) skewX(-18deg);
+}
+
 .nav-container:hover {
   border-color: rgba(255, 255, 255, 0.95);
 }
@@ -781,36 +810,30 @@ body {
 }
 
 /* ==========================================================================
-   PINNED HERO SECTION & CURTAIN ARCHITECTURE
-   Hero is position: sticky at top with z-index: 1.
-   Subsequent sections are wrapped in .content-curtain with z-index: 10.
+   HERO SECTION & NATURAL CONTINUOUS SCROLL FLOW
+   Hero fills first viewport and naturally scrolls upward under fixed HUD navbar.
    ========================================================================== */
 .hero-pin-wrapper {
   position: relative;
   width: 100%;
-  height: 100vh;
-  min-height: 680px;
+  min-height: 100vh;
   z-index: 1;
 }
 
 .hero-section {
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  height: 100vh;
-  min-height: 680px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 60px;
+  padding-top: 24px;
   padding-bottom: 40px;
   overflow: hidden;
   background: radial-gradient(circle at 50% 34%, #ffffff 0%, rgba(250, 250, 248, 0.94) 55%, rgba(245, 245, 242, 0.82) 100%);
   z-index: 1;
   pointer-events: auto;
-  transition: opacity 0.3s ease;
 }
 
 .hero-visual-wrapper {
@@ -1178,14 +1201,14 @@ body {
 
 /* ==========================================================================
    CONTENT CURTAIN & COMMON SECTION WRAPPERS
-   Curtain sits at z-index: 10 with opaque museum background to cover Hero.
+   Seamlessly follows Hero in continuous vertical flow.
    ========================================================================== */
 .content-curtain {
   position: relative;
-  z-index: 10;
-  margin-top: 100vh;
+  z-index: 2;
+  margin-top: 0;
   background-color: var(--bg-primary);
-  box-shadow: 0 -25px 65px rgba(13, 14, 20, 0.08);
+  box-shadow: 0 -20px 50px rgba(13, 14, 20, 0.04);
   border-top: 1px solid rgba(255, 255, 255, 0.9);
 }
 
